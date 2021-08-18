@@ -1,0 +1,27 @@
+plugins {
+    id 'org.asciidoctor.convert' version '1.5.8'
+    id 'java'
+    id 'maven-publish'
+    id 'signing'
+    id  'maven'
+}
+
+group 'com.bsl.flux'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    compile group: 'com.bea', name: 'jolt', version: '10.0'
+    compile group: 'com.bea', name: 'joltjse', version: '10.0'
+    compile group: 'com.bea', name: 'joltwls', version: '10.0'
+    compile group: 'com.bea', name: 'weblogic', version: '10.3'
+    compile group: 'com.bea', name: 'wlfullclient', version: '10.3'
+    compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.14.1'
+    compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.14.1'
+
+}
