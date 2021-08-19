@@ -129,10 +129,10 @@ public class JoltPoolManager
         );
         if (nConnectionCount < oSettings.getSizeMin()) {
             oPoolMgr.removeSessionPool(oSettings.getPoolName());
-            throw new BSLFokusException(StringUtil.concat(
-                    "Cannot create ", String.valueOf(oSettings.getSizeMin()),
-                    " connection",(oSettings.getSizeMin() == 1 ? "." : "s.")
-            ), 0
+            throw new BSLFokusException(
+                    "Cannot create "+ String.valueOf(oSettings.getSizeMin())+
+                    " connection"+(oSettings.getSizeMin() == 1 ? "." : "s.")
+            , 0
             );
         }
 
@@ -179,7 +179,8 @@ public class JoltPoolManager
         final SessionPoolManager      oPoolMgr         = (SessionPoolManager) obj;
         final SecurityContextImpl     oSecCtx          = null;
         final JoltPoolConfig.Settings oSettings        = JoltPoolConfig.getInstance().getSettings();
-        final String                  sPoolName        = StringUtil.concat(oSettings.getPoolName(), "_", String.valueOf(oTuxTimeout)); // Append the timeout to the cached pool's name.
+        final String                  sPoolName        = oSettings.getPoolName()+ "_"+String.valueOf(oTuxTimeout); // Append the timeout to the cached pool's name.
+
         final int                     nConnectionCount = oPoolMgr.createSessionPool(
                 oSettings.getAddressPrimary(),
                 oSettings.getAddressFailover(),
@@ -192,10 +193,10 @@ public class JoltPoolManager
         );
         if (nConnectionCount < oSettings.getSizeMin()) {
             oPoolMgr.removeSessionPool(oSettings.getPoolName());
-            throw new BSLFokusException(StringUtil.concat(
-                    "Cannot create ", String.valueOf(oSettings.getSizeMin()), " connection",
-                    (oSettings.getSizeMin() == 1 ? "" : "s"), ", instead got ", String.valueOf(nConnectionCount), "."
-            ), 0
+            throw new BSLFokusException(
+                    "Cannot create "+ String.valueOf(oSettings.getSizeMin())+ " connection"+
+                    (oSettings.getSizeMin() == 1 ? "" : "s")+ ", instead got "+ String.valueOf(nConnectionCount)+ "."
+            , 0
             );
         }
 
@@ -205,9 +206,7 @@ public class JoltPoolManager
         oSessionPool = (SessionPool)oPoolMgr.get(sPoolName);
         ++s_nJoltPoolCount;
         s_mpJoltPools.put(oTuxTimeout, oSessionPool);
-            log.info(StringUtil.concat(
-                    "JoltPoolManager::start::timeout=", String.valueOf(oTuxTimeout), "sec::Done, Jolt Session Pool [", sPoolName, "] initialized."
-            ));
+            log.info("JoltPoolManager::start::timeout="+ String.valueOf(oTuxTimeout)+ "sec::Done, Jolt Session Pool ["+ sPoolName+ "] initialized.");
 
         return oSessionPool;
     }

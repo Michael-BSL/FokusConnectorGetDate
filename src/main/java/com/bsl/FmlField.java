@@ -119,8 +119,6 @@ public class FmlField {
 
         if (this.type == FmlField.TYPE_STRING) {
             this.size = nSize;
-        } else {
-            this.size = -1;
         }
 
         if (sDefaultValue != null) {
@@ -208,15 +206,6 @@ public class FmlField {
         return (this.sequence);
     }
 
-
-    /**
-     * Returns the maximum nubmer of values which can be defined for a FML field.
-     *
-     * @return Maximum number of values of FML field.
-     */
-    protected int getMaxOccurrence() {
-        return (this.maxOccurrence);
-    }
 
 
     /**
@@ -376,116 +365,8 @@ public class FmlField {
         return (str);
     }
 
-    /**
-     * Returns name and value attributes for the FML field.
-     */
-    public String toStringNameValue() {
-        String str =
-                "{Name=" + this.name + ", " +
-                        "Value=[";
 
-        if (this.value == null || this.value.size() == 0) {
-            str = str + "null";
-        } else {
-            for (int i = 0; i < this.value.size(); i++) {
-                if (i == 0) {
-                    if (this.value.elementAt(i) != null) {
-                        str = str + this.value.elementAt(i).toString();
-                    } else {
-                        str = str + "null";
-                    }
-                } else {
-                    if (this.value.elementAt(i) != null) {
-                        str = str + ", " + this.value.elementAt(i).toString();
-                    } else {
-                        str = str + ", null";
-                    }
-                }
-            }
-        }
 
-        str = str + "]}";
-
-        return (str);
-    }
-
-    /**
-     * Returns name, index and value attributes for the FML field.
-     */
-    public String toStringNameIndexValue(String linePadding, String prefix, String suffix) {
-        return this.toStringNameIndexValueOld(linePadding, prefix, suffix);
-    }
-
-    /**
-     * Returns name, index and value attributes for the FML field.
-     */
-    private String toStringNameIndexValueOld(String linePadding, String prefix, String suffix) {
-        Object oValue;
-        String sValue;
-        String sIndex;
-        String sName;
-        String sEOL;
-
-        String str;
-
-        int maxIndex = (value != null) ? value.size() : 0;
-
-        String nameReplacement = getNameReplacement(CHAR_SPACE);
-
-        if ((this.value == null) || (this.value.size() == 0)) {
-            str = name + ", [null]";
-        } else {
-            str = "";
-            int numValues = this.value.size();
-            String sEntry;
-
-            for (int i = 0; i < numValues; i++) {
-                sName  = (((i > 0) ? (linePadding + prefix + nameReplacement + " ") : (name + ",")) + " ");
-                sIndex = TypeConverter.getPaddedInt(i, maxIndex, CHAR_SPACE) + ", ";
-                oValue = this.value.elementAt(i);
-                sValue = "[" + ((oValue != null) ? oValue.toString() : "null") + "]";
-                sEOL   = (i < numValues - 1) ? (suffix + "\n") : "";
-
-                sEntry = sName + sIndex + sValue + sEOL;
-
-                str += sEntry;
-            }
-        }
-
-        return str;
-    }
-
-    /**
-     * Returns name, index and value attributes for the FML field.
-     * @param sLinePadding  The <i>padding</i> to start each new line with.
-     * @param prefix
-     * @param suffix
-     * @return
-     */
-    public final String toStringNameIndexValue(final String sLinePadding, final char prefix, final char suffix) {
-        // Quick check to see if further processing is required...
-        final int nMaxIndex = value == null ? 0 : value.size();
-        if (nMaxIndex == 0) {
-            return name + ", [null]";
-        }
-
-        final String       sNameReplacement = getNameReplacement(CHAR_SPACE);
-        final StringBuilder buf              = new StringBuilder(1024);
-
-        for (int i = 0, nValues = this.value.size(); i < nValues; ++i) {
-            if (i == 0) {
-                buf.append(name).append(',').append(CHAR_SPACE);  // Name
-            } else {
-                buf
-                        .append(suffix).append('\n') // End of Line (EOL); Add the EOL from the previous line, if any.
-                        .append(sLinePadding).append(prefix).append(sNameReplacement).append(CHAR_SPACE).append(CHAR_SPACE);
-            }
-            buf
-                    .append(TypeConverter.getPaddedInt(i, nMaxIndex, CHAR_SPACE)).append(',').append(CHAR_SPACE) // Index
-                    .append('[').append(this.value.elementAt(i)).append(']'); // Value
-        }
-        return buf.toString();
-    }
 
     /**
      * Gets a String with length equal to name's length

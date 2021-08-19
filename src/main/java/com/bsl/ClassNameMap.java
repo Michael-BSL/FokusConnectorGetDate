@@ -95,31 +95,6 @@ public final class ClassNameMap
 
   //------------------------------------------------------------ Public methods
 
-  /**
-   * Returns the ID of the specified object. If the object type is unknown;
-   * <code>-1</code> is returned.
-   * <p>
-   * <b>Note!</b> Only the standard java and primitive types are known!
-   * @param o The object to get the id of.
-   * @return The id of the object or <code>-1</code> is returned if the object
-   * type is unknown.
-   */
-  public static final int getClassId(Object o) {
-    return INSTANCE.getClassIdImpl(o);
-  }
-
-  /**
-   * Returns the ID of the specified object. If the object type is unknown;
-   * <code>-1</code> is returned.
-   * <p>
-   * <b>Note!</b> Only the standard java and primitive types are known!
-   * @param name The name of the object to get the id of.
-   * @return The id of the object or <code>-1</code> is returned if the object
-   * type is unknown.
-   */
-  public static final int getClassIdWithName(String name) {
-    return INSTANCE.getClassIdWithNameImpl(name);
-  }
 
   //----------------------------------------------------------- Private methods
 

@@ -2,7 +2,6 @@ package com.bsl.services;
 
 import com.bsl.TuxedoService;
 import com.bsl.exceptions.BSLFokusException;
-import com.bsl.exceptions.BSLFokusException;
 
 public class ServiceFactory {
 

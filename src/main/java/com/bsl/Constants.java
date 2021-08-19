@@ -12,5 +12,8 @@ public class Constants {
     public static final String BSL = "BSL";
     public static final Integer BSL_OPERATOR = 30000;
 
+    public static final String OUTPUT_FILE_PATH = "service_output_files";
+
+
 
 }

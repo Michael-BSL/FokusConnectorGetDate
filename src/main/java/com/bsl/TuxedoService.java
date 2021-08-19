@@ -727,9 +727,8 @@ public abstract class TuxedoService
             oos.writeObject(obj);
             oos.flush();
             oos.close();
-         //   if (log.isDebugEnabled()) {
-                log.info("Stored DataSet in file: '" + fileName + "'");
-           // }
+            log.info("Stored DataSet in file: '" + fileName + "'");
+
         }
 
     }
@@ -771,13 +770,14 @@ public abstract class TuxedoService
         String packageNamePrefix = null;
         //inl 05.11.07 - cvFolder is not a real service name therefor doesn't have FML buffer that can be printed out. The correct service to print out is csApiBan.
 
-            packageNamePrefix = "com.bsl.services.";
+        packageNamePrefix = "com.bsl.services.";
 
 
-        final String sOutputClass = StringUtil.concat(
-                packageNamePrefix,
-                sClassName.substring(nDotIdx + 1, nSrvIdx), "Output"
-        );
+        final String sOutputClass =
+                packageNamePrefix+
+                sClassName.substring(nDotIdx + 1, nSrvIdx)+ "Output";
+
+
 
         // Create the arguments to pass the constructor...
         final Object[] oConstructorArgs = new Object[] { res };
@@ -792,7 +792,7 @@ public abstract class TuxedoService
     private void  write2File(String ban,String serviceOutput){
         try {
             String timeStamp =  new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
-            String fileName = "service_output_files" + File.separator + this.name + "_" + ban + "_" + timeStamp + ".ud";
+            String fileName =  Constants.OUTPUT_FILE_PATH+ File.separator + this.name + "_" + ban + "_" + timeStamp + ".ud";
             FileWriter myWriter = new FileWriter(fileName);
             myWriter.write(serviceOutput);
             myWriter.close();

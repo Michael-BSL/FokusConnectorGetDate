@@ -8,7 +8,7 @@ package com.bsl;
  * Time: 12:23 PM
  * To change this template use File | Settings | File Templates.
  */
-public final class JoltPoolConfig extends AbstractRegistry
+public final class JoltPoolConfig
 {
     //--| These are initialised by the ancestor class |---------------------------------------------------------------
 
@@ -21,7 +21,6 @@ public final class JoltPoolConfig extends AbstractRegistry
 
     private JoltPoolConfig() {
         System.out.println("constructor");
-       // setup(CONFIG_JOLT_FILE);
     }
 
     public static final JoltPoolConfig getInstance() {
@@ -35,10 +34,10 @@ public final class JoltPoolConfig extends AbstractRegistry
                 return Constants.JOLT_POOLNAME;
             }
             public String[] getAddressPrimary() {
-                return StringUtil.split( Constants.JOLT_ADDRESS_PRIMARY, s_sWhiteSpaceChars);
+                return  Constants.JOLT_ADDRESS_PRIMARY.split( s_sWhiteSpaceChars);
             }
             public String[] getAddressFailover() {
-                return StringUtil.split(Constants.JOLT_ADDRESS_FAILOVER, s_sWhiteSpaceChars);
+                return Constants.JOLT_ADDRESS_FAILOVER.split(s_sWhiteSpaceChars);
             }
             public int getSizeMax() {
                 return Constants.JOLT_SIZE_MAX;
